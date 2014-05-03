@@ -1,0 +1,162 @@
+TSQL functions
+
+
+This is a collection of 123 TSQL functions for professional, academic or learning purposes. There are many conversions hexadecimal/octal/binary/Roman numerals, mathematical functions such as hyperbolic, logic and trigonometric. Combinatorial functions such as combinations, permutations (factorial), arrangements. Other interesting functions include turning a number into plain English, Morse code, EBCDIC and vice-versa, Levenshtein Distance (linguistics), encryption, infinite precision division and number theory functions: primes, deficient, perfect, abundant, golden numbers. Validation: valid email, IP, ZIP code and many others. There are some useful string functions to count occurrences of a string within another, find a character position in a string from the end of the string, wrap, rewrap, unwrap a string, etc…
+
+Some functions are clones from Microsoft Access  or VBA(IIF, date, time, IsNull, IsEmpty), others from Oracle (INITCAP, TRANSLATE, RPAD, LPAD, ADD_MONTHS, MONTHS_BETWEEN, LAST_DAY, NEXT_DAY).
+
+Base convertion(10)+Combinatorial(6)+Algebra(9)+Numeric(14)+String(24)+Date(8)
+Comparison, validation(27)+Logic(11)+Trigonometric(5)+Hyperbolic(9)=123 total
+
+Levenshtein Distance algorithm-original developer: Michael Gilleland  (thank you for allowing me to translate the code to TSQL J )  http://www.merriampark.com/ld.htm 
+
+Tested on Microsoft SQL Server 2000, BigInt should be replaced with int, in order to work with other versions of Microsoft SQL Server or Sybase.
+
+Developed or translated to TSQL by Joseph Gama.
+
+
+Base convertion 
+DECTON(i1, i2)	Converts a decimal number i1 to base i2. Input: INT, INT; Output: VARCHAR(255)
+DECTOHEX(i)	Converts a decimal number i to hexadecimal. Input: INT; Output: VARCHAR(255)
+DECTOBIN(i)	Converts a decimal number i to binary. Input: INT; Output: VARCHAR(255)
+DECTOOCT(i)	Converts a decimal number i to octal. Input: INT; Output: VARCHAR(255)
+NTODEC(s, i)	Converts a number s on base i to decimal. Input: VARCHAR(255), INT; Output: INT
+HEXTODEC(s)	Converts an hexadecimal number to decimal. Input: VARCHAR(255); Output: INT
+BINTODEC(s)	Converts a binary number to decimal. Input: VARCHAR(255); Output: INT
+OCTTODEC(s)	Converts an octal number to decimal. Input: VARCHAR(255); Output: INT
+A2ROMAN(i)   Converts an arabic numeral to roman, as a string. Input: INT; Output: VARCHAR(20)
+ROMAN2A(s)	Converts an roman numeral to arabic. Input: VARCHAR(20); Output: INT
+
+Combinatorial
+COMBIN(b1, b2)   Returns the number of combinations for a given number of objects. Input: BIGINT, BIGINT; Output: BIGINT
+ARR(b1, b2)	Returns the number of arrangements for a given number of objects. Input: BIGINT, BIGINT; Output: BIGINT
+FACT(b)   Returns the factorial of a number. Input: BIGINT; Output: BIGINT
+FACTDOUBLE(f)   Returns the double factorial of a number. Input: FLOAT; Output: FLOAT
+SUMSEQ(b) Returns the nth triangle number which is the summation from 1 to b. Input: BIGINT; Output: BIGINT
+FIBONACCI(b)	Returns the nth Fibonacci series for a given number b. Input: BIGINT; Output: BIGINT
+
+Algebra
+LOGN(f1, f2)	Returns the logarithm (base f2) of f1. Input: FLOAT, FLOAT; Output: FLOAT
+LOG2(f)	Returns the logarithm (base 2) of f. Input: FLOAT; Output: FLOAT
+GCD(i1, i2)   Returns the greatest common divisor of 2 numbers. Input: INT, INT; Output: INT
+LCM(i1, i2)   Returns the least common multiple of 2 numbers. Input: INT, INT; Output: INT
+CUBE(f)	Returns the cube of the given expression. Input: FLOAT; Output: FLOAT
+NROOT(f1, f2)	Returns the root f2 of a number f1. Input: FLOAT, FLOAT; Output: FLOAT
+SQRTPI(f)   Returns the square root of (f * Pi). Input: FLOAT; Output: FLOAT
+DISTANCE(f1,f2,f3,f4)	Returns the distance between 2 points P(f1, f2) to T(f3, f4). Input: FLOAT, FLOAT, FLOAT, FLOAT; Output: FLOAT
+SLOPE(f1,f2,f3,f4)	Returns the slope of a line define by 2 points P(f1, f2) and T(f3, f4). Input: FLOAT, FLOAT, FLOAT, FLOAT; Output: FLOAT
+
+Numeric
+DIVI(i1, i2, i3)	Returns the result of the division of i1 by i2 with precision i3 (Infinite precision division).  Input: INT, INT, INT; Output: VARCHAR(5000)
+NINT(f)   Rounds a number to the nearest integer. Input: FLOAT; Output: INT
+TRUNC(f)   Returns a number truncated to an integer. Input: FLOAT; Output: INT
+FRAC(f)	Returns the decimal part of a number. Input: FLOAT; Output: FLOAT
+MIN2(i1, i2)	Returns the smallest of 2 numbers. Input: INT, INT; Output: INT
+MIN3(i1, i2, i3)	Returns the smallest of 3 numbers. Input: INT, INT, INT; Output: INT
+MAX2(i1, i2)	Returns the largest of 2 numbers. Input: INT, INT; Output: INT
+MAX3(i1, i2, i3)	Returns the largest of 3 numbers. Input: INT, INT, INT; Output: INT
+INC(i)	Returns a number incremented by 1. Input: INT; Output: INT
+DEC(i)	Returns a number decremented by 1. Input: INT; Output: INT
+PHI()	Returns phi, the "golden ratio". Output: FLOAT
+E()	Returns e, Natural Logarithmic Base. Output: FLOAT
+PERFNUMBER(i)	Returns the nth perfect number. Input: INT; Output: INT
+SUMALIQUOT(i)	Returns the sum of all aliquots from i. Input: INT; Output: INT
+
+String
+INITCAP(s)	Returns a string with the first letter of each word in uppercase, all other letters in lowercase (capitalize first character).  Input: VARCHAR(255); Output: VARCHAR(255)
+PROPERCASE(s)	Returns a string with the first letter of each word at the beginning of a sentence  in uppercase, all other letters in lowercase.  Input: VARCHAR(255); Output: VARCHAR(255)
+INCLUDED(s1 ,s2)	Returns how many times a string s1 is included (occurs) into s2. Input: VARCHAR(255), VARCHAR(255); Output: INT
+TRANSLATE(s1, s2, s3)	Returns a string with all occurrences of each character in another one replaced by its corresponding character in a third one. Input: VARCHAR(255), VARCHAR(255), VARCHAR(255); Output: VARCHAR(255)
+RPAD(s1, I, s2)	Returns a string s1 right-padded to length i with a sequence of characters s2. Input: VARCHAR(255), INT, VARCHAR(255); Output: VARCHAR(255)
+LPAD(s1, I, s2)	Returns a string s1 left-padded to length i with a sequence of characters s2. Input: VARCHAR(255), INT, VARCHAR(255); Output: VARCHAR(255)
+VAL(s) Returns a numeric value from a string, it is the opposite of STR. Input: VARCHAR(255); Output: FLOAT
+NUMBERTOWORDS(i) Returns the number as English words. Input: INT; Output: VARCHAR(255)
+MORSE(s)	Returns the morse code corresponding to string s. Input: VARCHAR(255); Output: VARCHAR(255)
+FROMMORSE(s)	Returns the text corresponding to a morse code string s. Input: VARCHAR(255); Output: VARCHAR(255)
+CHARINDEXREV(s1, s2)	Returns the position of an occurrence of string s2 within s1, from the end of string. Input: VARCHAR(255), VARCHAR(255); Output: INT
+EBCDIC2ASCII(s)	Converts a string from EBCDIC to ASCII. Input: VARCHAR(255); Output: VARCHAR(255)
+ASCII2EBCDIC(s)	Converts a string from ASCII to EBCDIC. Input: VARCHAR(255); Output: VARCHAR(255)
+TRIM(s)	Returns a string removing spaces at both ends. Input: VARCHAR(255); Output: VARCHAR(255)
+WRAP(s, i)	Returns a string s wrapped in blocks of i characters. Input: VARCHAR(255), INT; Output: VARCHAR(255)
+UNWRAP(s)	Returns a string removing all wrapping.  Input: VARCHAR(255); Output: VARCHAR(255)
+REWRAP(s, i)	Returns a string s wrapped in blocks of i characters , removing previous wrapping. Input: VARCHAR(255), INT; Output: VARCHAR(255)
+LEVENSHTEIN(s1, s2)	Returns the Levenshtein Distance between strings s1 and s2. Input: VARCHAR(255), VARCHAR(255); Output: INT
+STRIPL(s)	Returns the left side of half of the string. Input: VARCHAR(255); Output: VARCHAR(255)
+STRIPR(s)	Returns the right side of half of the string. Input: VARCHAR(255); Output: VARCHAR(255)
+XORCHAR(s,t)	Returns a string encrypted/decrypted with numeric key t, 0<t<255 ( XOR encryption ). Input: VARCHAR(255), TINYINT; Output: VARCHAR(255)
+CRYPTX8 (s1,s2)	Returns a string s1 encrypted/decrypted with key s2, up to 8 chars ( XOR encryption ). Input: VARCHAR(1024), VARCHAR(8); Output: VARCHAR(1024)
+IPOCTECT(s, I)	Returns an octect i (1-4) from an IP. Input: VARCHAR(15), INT; Output: VARCHAR(3)
+WORDCOUNT(s)	Returns the number of words from string s. Input: VARCHAR(255); Output: INT
+
+
+
+Date
+ADD_MONTHS(d, i)	Returns the date d plus i months. Input: DATETIME, INT; Output: DATETIME
+MONTHS_BETWEEN(d1, d2)	Returns number of months between dates d1 and d2. Input: DATETIME, DATETIME; Output: INT
+LAST_DAY(d)	Returns the date of the last day of the month that contains d. Input: DATETIME; Output: DATETIME
+NEXT_DAY(d, i)	Returns the date of the first weekday named by n (Sunday = 1, Saturday = 7) that is later than the date d. Input: DATETIME, INT; Output: DATETIME
+DDATE(d)	Returns the date from d. Input: DATETIME; Output: VARCHAR(255)
+DTIME(d)	Returns the time from d. Input: DATETIME; Output: VARCHAR(255)
+GREGORIAN2HIJRI(d)	Returns the date FROM Gregorian into Hijri calendar. Input: DATETIME; Output: NCHAR
+HIJRI2GREGORIAN(d)	Returns the date FROM Hijri into Gregorian calendar. Input: DATETIME; Output: DATETIME
+
+Comparison, validation
+IIF(b, v1, v2)	Returns one of two parts, depending on the evaluation of an expression. Input: BIT, SQL_VARIANT, SQL_VARIANT; Output: SQL_VARIANT
+VALIDIP(s)	Returns true if the string is a valid IP. Input: VARCHAR(15); Output: BIT
+VALIDEMAIL(s)	Returns true if the string is a valid email address. Input: VARCHAR(255); Output: BIT
+VALIDZIP(s)	Returns true if the string is a valid zip code. Input: VARCHAR(255); Output: BIT
+VALIDZIP9(s)	Returns true if the string is a valid zip code 5+4. Input: VARCHAR(255); Output: BIT
+ISBIN(s)	Returns true if the string is a valid binary number. Input: VARCHAR(255); Output: BIT
+ISHEX(s)	Returns true if the string is a valid hexadecimal number. Input: VARCHAR(255); Output: BIT
+ISOCT(s)	Returns true if the string is a valid octal number. Input: VARCHAR(255); Output: BIT
+ISROMAN(s)	Returns true if the string is a valid Roman numeral. Input: VARCHAR(255); Output: BIT
+ISINTNUMBER(s)	Returns true if the string is a valid integer number. Input: VARCHAR(255); Output: BIT
+ISINTPOSNUMBER(s)	Returns true if the string is a valid positive integer number. Input: VARCHAR(255); Output: BIT
+ISNUMBER(s)	Returns true if the string is a valid number. Input: VARCHAR(255); Output: BIT
+ISPOSNUMBER(s)	Returns true if the string is a valid positive number. Input: VARCHAR(255); Output: BIT
+ISLETTER(s)	Returns true if the string has only letters. Input: VARCHAR(255); Output: BIT
+ISALPHA(s)	Returns true if the string has valid alphanumeric characters. Input: VARCHAR(255); Output: BIT
+ISITNULL(v)	Returns true if the input is null. Input: SQL_VARIANT; Output: BIT
+ISEMPTY(v)	Returns true if the input is an empty string. Input: SQL_VARIANT; Output: BIT
+ISEVEN(i)	Returns true if the number is even. Input: INT; Output: BIT
+ISODD(i)	Returns true if the number is odd. Input: INT; Output: BIT
+ISNEG(i)	Returns true if the number is negative. Input: INT; Output: BIT
+PALINDROME(i)	Returns true if the number is a palindrome. Input: INT; Output: BIT
+PALINDROMEW(s)	Returns true if the string is a palindrome. Input: VARCHAR(255);  Output: BIT
+PENTIUMBUG()	Returns true if the Pentium (early versions) bug is present. Output: BIT
+ISPERFNUM(i)	Returns true if the number is perfect. Input: INT; Output: BIT
+ISDEFNUM(i)	Returns true if the number is deficient. Input: INT; Output: BIT
+ISABUNDNUM(i)	Returns true if the number is abundant. Input: INT; Output: BIT
+ISPRIME(i)	Returns true if the number is prime. Input: INT; Output: BIT
+
+
+Logical
+SHIFTLEFT(i1, i2)	Returns a number shifted to the left. Input: INT, INT; Output: INT
+SHIFTRIGHT(i1, i2)	Returns a number shifted to the right. Input: INT, INT; Output: INT
+GETBIT(i1, i2)	Returns the value of a certain bit. Input: INT, INT; Output: INT
+SETBIT(i1, i2)	Sets the value of a certain bit. Input: INT, INT; Output: INT
+RESETBIT(i1, i2)	Resets the value of a certain bit. Input: INT, INT; Output: INT
+IMPLIES(i1, i2)	Returns the result of a logical formal implication. Input: INT, INT; Output: INT
+EQUIVALENT(i1, i2)	Returns the result of a logical formal equivalence. Input: INT, INT; Output: INT
+COMPLEMENT1(i)	Returns a number's one's complement. Input: INT; Output: INT
+COMPLEMENT2(i)	Returns a number's two's complement. Input: INT; Output: INT
+NAND(i1, i2) 	Returns the result of a logical negated AND. Input: INT, INT; Output: INT
+NOR(i1, i2)	Returns the result of a logical negated OR. Input: INT, INT; Output: INT
+
+Trigonometric
+SEC(f)	Returns the trigonometric secant of the given angle (in radians) in the given expression. Input: FLOAT; Output: FLOAT
+COSEC(f)	Returns the trigonometric cosecant of the given angle (in radians) in the given expression. Input: FLOAT; Output: FLOAT
+ACOT(f)	Returns the angle in radians whose cotangent is the given float expression (also called arccotangent). Input: FLOAT; Output: FLOAT
+ASEC(f)	Returns the angle in radians whose secant is the given float expression (also called arcsecant). Input: FLOAT; Output: FLOAT
+ACOSEC(f)	Returns the angle in radians whose cosecant is the given float expression (also called arccosecant). Input: FLOAT; Output: FLOAT
+
+Hyperbolic
+SINH(f)   Returns the hyperbolic sine of a number. Input: FLOAT; Output: FLOAT
+COSH(f)   Returns the hyperbolic cosine of a number. Input: FLOAT; Output: FLOAT
+TANH(f)   Returns the hyperbolic tangent of a number. Input: FLOAT; Output: FLOAT
+SECH(f)	Returns the hyperbolic secant of a number. Input: FLOAT; Output: FLOAT
+COSECH(f)	Returns the hyperbolic cosecant of a number. Input: FLOAT; Output: FLOAT
+COTH(f)	Returns the hyperbolic cotangent of a number. Input: FLOAT; Output: FLOAT
+ASINH(f)   Returns the inverse hyperbolic sine of a number. Input: FLOAT; Output: FLOAT
+ACOSH(f)   Returns the inverse hyperbolic cosine of a number. Input: FLOAT; Output: FLOAT
+ATANH(f)   Returns the inverse hyperbolic tangent of a number. Input: FLOAT; Output: FLOAT
